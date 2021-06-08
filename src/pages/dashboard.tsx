@@ -16,7 +16,8 @@ const options: ApexOptions = {
     zoom: {
       enabled: false,
     },
-    foreColor: theme.colors.gray[500]
+    foreColor: theme.colors.gray[500],
+    
   },
   grid: {
     show: false,
@@ -43,6 +44,10 @@ const options: ApexOptions = {
       '2021-03-22T00:00:00.000Z',
       '2021-03-23T00:00:00.000Z',
       '2021-03-24T00:00:00.000Z',
+      '2021-03-25T00:00:00.000Z',
+      '2021-03-26T00:00:00.000Z',
+      '2021-03-27T00:00:00.000Z',
+      '2021-03-28T00:00:00.000Z',
     ]
   },
   fill: {
@@ -52,12 +57,13 @@ const options: ApexOptions = {
       shade: 'dark',
       opacityFrom: 0.7,
       opacityTo: 0.3
-    }
-  }
+    },
+  },
+  colors: ['orange']
 };
 
 const series = [
-  { name: 'series1', data: [31, 124, 25, 163, 143, 198, 19] }
+  { name: 'series1', data: [11, 20, 350, 370, 350, 265, 237, 16, 11, 11] }
 ];
 
 export default function Dashboard() {
@@ -75,7 +81,7 @@ export default function Dashboard() {
             borderRadius={8}
             pb="4"
           >
-            <Text fontSize="lg" mb="4" >Subscribers of the week</Text>
+            <Text fontSize="lg" mb="4" >A hat?</Text>
             <Chart 
               options={options}
               series={series}
@@ -89,7 +95,7 @@ export default function Dashboard() {
             borderRadius={8}
             pb="4"
           >
-            <Text fontSize="lg" mb="4" >Opening fee</Text>
+            <Text fontSize="lg" mb="4" >A constrictor digesting an elephant</Text>
             <Chart 
               options={options}
               series={series}
