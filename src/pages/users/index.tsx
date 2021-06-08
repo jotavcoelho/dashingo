@@ -11,14 +11,21 @@ import {
   Text, 
   Th, 
   Thead,
-  Tr, 
+  Tr,
+  useBreakpointValue, 
 } from "@chakra-ui/react";
+import Link from "next/link";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
 
 export default function UserList() {
+  const isWide = useBreakpointValue({
+    base: false,
+    lg: true,
+  });
+  
   return (
     <Box>
       <Header />
@@ -29,30 +36,32 @@ export default function UserList() {
           <Flex mb="8" justify="space-between" align="center">
             <Heading size="lg" fontWeight="normal">Users</Heading>
 
-            <Button
-              as="a" 
-              size="sm" 
-              fontSize="sm" 
-              colorScheme="pink"
-              leftIcon={<Icon as={RiAddLine} fontSize="20"/>}
-            >
-              Create new User
-            </Button>
+            <Link href="/users/create" passHref>
+              <Button
+                as="a" 
+                size="sm" 
+                fontSize="sm" 
+                colorScheme="pink"
+                leftIcon={<Icon as={RiAddLine} fontSize="20"/>}
+              >
+                Create new User
+              </Button>
+            </Link>
           </Flex>
           <Table colorScheme="whiteAlpha">
             <Thead>
               <Tr>
-                <Th px="6" color="gray.300" p="8">
+                <Th px={["4", "4", "6" ]} color="gray.300" p="8">
                   <Checkbox colorScheme="pink"/>
                 </Th>
                 <Th>User</Th>
-                <Th>Date of signing</Th>
-                <Th w="8"></Th>
+                {isWide && <Th>Date of signing</Th>}
+                {isWide && <Th w="8"></Th>}
               </Tr>
             </Thead>
             <Tbody>
               <Tr>
-                <Td px="8">
+                <Td px={["4", "4", "8"]}>
                  <Checkbox colorScheme="pink"/>
                 </Td>
                 <Td>
@@ -61,8 +70,8 @@ export default function UserList() {
                     <Text fontSize="sm" color="gray.300">emaildodiego.com@www/br</Text>
                   </Box>
                 </Td>
-                <Td>April 4th, 2021</Td>
-                <Td>
+                {isWide && <Td>April 4th, 2021</Td>}
+                {isWide && <Td>
                   <Button
                     as="a" 
                     size="sm" 
@@ -70,12 +79,12 @@ export default function UserList() {
                     colorScheme="purple"
                     leftIcon={<Icon as={RiPencilLine} fontSize="16"/>}
                   >
-                    Edit
+                    { isWide ? 'Edit' : '' }
                   </Button>
-                </Td>
+                </Td>}
               </Tr>
               <Tr>
-                <Td px="8">
+                <Td px={["4", "4", "8"]}>
                  <Checkbox colorScheme="pink"/>
                 </Td>
                 <Td>
@@ -84,8 +93,8 @@ export default function UserList() {
                     <Text fontSize="sm" color="gray.300">emaildodiego.com@www/br</Text>
                   </Box>
                 </Td>
-                <Td>April 4th, 2021</Td>
-                <Td>
+                {isWide && <Td>April 4th, 2021</Td>}
+                {isWide && <Td>
                   <Button
                     as="a" 
                     size="sm" 
@@ -93,12 +102,12 @@ export default function UserList() {
                     colorScheme="purple"
                     leftIcon={<Icon as={RiPencilLine} fontSize="16"/>}
                   >
-                    Edit
+                    { isWide ? 'Edit' : '' }
                   </Button>
-                </Td>
+                </Td>}
               </Tr>
               <Tr>
-                <Td px="8">
+                <Td px={["4", "4", "8"]}>
                  <Checkbox colorScheme="pink"/>
                 </Td>
                 <Td>
@@ -107,8 +116,8 @@ export default function UserList() {
                     <Text fontSize="sm" color="gray.300">emaildodiego.com@www/br</Text>
                   </Box>
                 </Td>
-                <Td>April 4th, 2021</Td>
-                <Td>
+                {isWide && <Td>April 4th, 2021</Td>}
+                {isWide && <Td>
                   <Button
                     as="a" 
                     size="sm" 
@@ -116,9 +125,9 @@ export default function UserList() {
                     colorScheme="purple"
                     leftIcon={<Icon as={RiPencilLine} fontSize="16"/>}
                   >
-                    Edit
+                    { isWide ? 'Edit' : '' }
                   </Button>
-                </Td>
+                </Td>}
               </Tr>
             </Tbody>
           </Table>
