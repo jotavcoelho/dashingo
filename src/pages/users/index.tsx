@@ -5,6 +5,7 @@ import {
   Flex, 
   Heading, 
   Icon, 
+  Spinner,
   Table, 
   Tbody, 
   Td, 
@@ -17,11 +18,20 @@ import {
 import Link from "next/link";
 import { useEffect } from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
+import { useQuery } from 'react-query';
+
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
 
 export default function UserList() {
+  const { data, isLoading, error } = useQuery('users', async () => {
+    const response = await fetch('http://localhost:3000/api/users')
+    const data = await response.json();
+
+    return data;
+  });
+
   const isWide = useBreakpointValue({
     base: false,
     lg: true,
@@ -55,91 +65,102 @@ export default function UserList() {
               </Button>
             </Link>
           </Flex>
-          <Table colorScheme="whiteAlpha">
-            <Thead>
-              <Tr>
-                <Th px={["4", "4", "6" ]} color="gray.300" p="8">
-                  <Checkbox colorScheme="pink"/>
-                </Th>
-                <Th>User</Th>
-                {isWide && <Th>Date of signing</Th>}
-                {isWide && <Th w="8"></Th>}
-              </Tr>
-            </Thead>
-            <Tbody>
-              <Tr>
-                <Td px={["4", "4", "8"]}>
-                 <Checkbox colorScheme="pink"/>
-                </Td>
-                <Td>
-                  <Box>
-                    <Text fontWeight="bold">Diego Fernandes</Text>
-                    <Text fontSize="sm" color="gray.300">emaildodiego.com@www/br</Text>
-                  </Box>
-                </Td>
-                {isWide && <Td>April 4th, 2021</Td>}
-                {isWide && <Td>
-                  <Button
-                    as="a" 
-                    size="sm" 
-                    fontSize="sm" 
-                    colorScheme="purple"
-                    leftIcon={<Icon as={RiPencilLine} fontSize="16"/>}
-                  >
-                    { isWide ? 'Edit' : '' }
-                  </Button>
-                </Td>}
-              </Tr>
-              <Tr>
-                <Td px={["4", "4", "8"]}>
-                 <Checkbox colorScheme="pink"/>
-                </Td>
-                <Td>
-                  <Box>
-                    <Text fontWeight="bold">Diego Fernandes</Text>
-                    <Text fontSize="sm" color="gray.300">emaildodiego.com@www/br</Text>
-                  </Box>
-                </Td>
-                {isWide && <Td>April 4th, 2021</Td>}
-                {isWide && <Td>
-                  <Button
-                    as="a" 
-                    size="sm" 
-                    fontSize="sm" 
-                    colorScheme="purple"
-                    leftIcon={<Icon as={RiPencilLine} fontSize="16"/>}
-                  >
-                    { isWide ? 'Edit' : '' }
-                  </Button>
-                </Td>}
-              </Tr>
-              <Tr>
-                <Td px={["4", "4", "8"]}>
-                 <Checkbox colorScheme="pink"/>
-                </Td>
-                <Td>
-                  <Box>
-                    <Text fontWeight="bold">Diego Fernandes</Text>
-                    <Text fontSize="sm" color="gray.300">emaildodiego.com@www/br</Text>
-                  </Box>
-                </Td>
-                {isWide && <Td>April 4th, 2021</Td>}
-                {isWide && <Td>
-                  <Button
-                    as="a" 
-                    size="sm" 
-                    fontSize="sm" 
-                    colorScheme="purple"
-                    leftIcon={<Icon as={RiPencilLine} fontSize="16"/>}
-                  >
-                    { isWide ? 'Edit' : '' }
-                  </Button>
-                </Td>}
-              </Tr>
-            </Tbody>
-          </Table>
 
-          <Pagination />
+          { isLoading ? (
+            <Flex justify="center">
+              <Spinner />
+            </Flex>
+          ) : error ? (
+            <Flex justify="center">Failure obtaining user data</Flex>
+          ) : (
+            <>
+              <Table colorScheme="whiteAlpha">
+              <Thead>
+                <Tr>
+                  <Th px={["4", "4", "6" ]} color="gray.300" p="8">
+                    <Checkbox colorScheme="pink"/>
+                  </Th>
+                  <Th>User</Th>
+                  {isWide && <Th>Date of signing</Th>}
+                  {isWide && <Th w="8"></Th>}
+                </Tr>
+              </Thead>
+              <Tbody>
+                <Tr>
+                  <Td px={["4", "4", "8"]}>
+                  <Checkbox colorScheme="pink"/>
+                  </Td>
+                  <Td>
+                    <Box>
+                      <Text fontWeight="bold">Diego Fernandes</Text>
+                      <Text fontSize="sm" color="gray.300">emaildodiego.com@www/br</Text>
+                    </Box>
+                  </Td>
+                  {isWide && <Td>April 4th, 2021</Td>}
+                  {isWide && <Td>
+                    <Button
+                      as="a" 
+                      size="sm" 
+                      fontSize="sm" 
+                      colorScheme="purple"
+                      leftIcon={<Icon as={RiPencilLine} fontSize="16"/>}
+                    >
+                      { isWide ? 'Edit' : '' }
+                    </Button>
+                  </Td>}
+                </Tr>
+                <Tr>
+                  <Td px={["4", "4", "8"]}>
+                  <Checkbox colorScheme="pink"/>
+                  </Td>
+                  <Td>
+                    <Box>
+                      <Text fontWeight="bold">Diego Fernandes</Text>
+                      <Text fontSize="sm" color="gray.300">emaildodiego.com@www/br</Text>
+                    </Box>
+                  </Td>
+                  {isWide && <Td>April 4th, 2021</Td>}
+                  {isWide && <Td>
+                    <Button
+                      as="a" 
+                      size="sm" 
+                      fontSize="sm" 
+                      colorScheme="purple"
+                      leftIcon={<Icon as={RiPencilLine} fontSize="16"/>}
+                    >
+                      { isWide ? 'Edit' : '' }
+                    </Button>
+                  </Td>}
+                </Tr>
+                <Tr>
+                  <Td px={["4", "4", "8"]}>
+                  <Checkbox colorScheme="pink"/>
+                  </Td>
+                  <Td>
+                    <Box>
+                      <Text fontWeight="bold">Diego Fernandes</Text>
+                      <Text fontSize="sm" color="gray.300">emaildodiego.com@www/br</Text>
+                    </Box>
+                  </Td>
+                  {isWide && <Td>April 4th, 2021</Td>}
+                  {isWide && <Td>
+                    <Button
+                      as="a" 
+                      size="sm" 
+                      fontSize="sm" 
+                      colorScheme="purple"
+                      leftIcon={<Icon as={RiPencilLine} fontSize="16"/>}
+                    >
+                      { isWide ? 'Edit' : '' }
+                    </Button>
+                  </Td>}
+                </Tr>
+              </Tbody>
+            </Table>
+
+            <Pagination />
+          </>
+          )}
         </Box>
       </Flex>
     </Box>
