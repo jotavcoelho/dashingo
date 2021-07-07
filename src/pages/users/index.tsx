@@ -19,8 +19,8 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { useQuery } from 'react-query';
-import { api } from "../../../services/api";
-import { useUsers } from "../../../services/hooks/useUsers";
+import { api } from "../../services/api";
+import { useUsers } from "../../services/hooks/useUsers";
 
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
