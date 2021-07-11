@@ -21,17 +21,20 @@ import { useEffect, useState } from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { useQuery } from 'react-query';
 import { api } from "../../services/api";
-import { useUsers } from "../../services/hooks/useUsers";
+import { getUsers, useUsers } from "../../services/hooks/useUsers";
 
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
 import { queryClient } from "../../services/queryClient";
+import { GetServerSideProps } from "next";
 
-export default function UserList() {
+export default function UserList({ users }) {
   const [page, setPage] = useState(1);
 
-  const { data, isLoading, isFetching, error } = useUsers(page);
+  const { data, isLoading, isFetching, error } = useUsers(page, {
+    initialData: users
+  });
 
   const isWide = useBreakpointValue({
     base: false,
@@ -144,3 +147,13 @@ export default function UserList() {
     </Box>
   );
 }
+
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const { users, totalCount} = await getUsers(1);
+
+//   return {
+//     props: {
+//       users,
+//     }
+//   }
+// }
